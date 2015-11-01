@@ -1,0 +1,95 @@
+{%  extends 'base.html.twig' %}
+
+{% block title %} {{archetype.name}} {% endblock %}
+
+{% block body %}
+    <h1>{{ archetype.name }}</h1>
+
+    <ul>
+        <li>Stun : {{ archetype.stun }}</li>
+        <li>Blight : {{ archetype.blight }}</li>
+        <li>Disease : {{ archetype.disease }}</li>
+        <li>DeathBlow : {{ archetype.deathBlow }}</li>
+        <li>Move : {{ archetype.move }}</li>
+        <li>Bleed : {{ archetype.bleed }}</li>
+        <li>Debuff : {{ archetype.debuff }}</li>
+        <li>Trap : {{ archetype.trap }}</li>
+    </ul>
+
+    <h2>Abilities</h2>
+
+    <table>
+        <thead>
+        <tr>
+            {% for ability in archetype.abilities  %}
+                <th>{{ ability.name }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                    <td>Cast position : {% for position in ability.castPositions %}
+                        {{ position }} {% endfor %}
+                    </td>
+                    <td>Target position : {% for position in ability.targetPositions %}
+                            {{ position }} {% endfor %}
+                    </td>
+                    <td>Description :{{ ability.description }}</td>
+                    <td><a href="{{ path("archetype_ability_update", {'id': ability.id, 'archetype': archetype.name}) }}">Modify</a></td>
+                    <td><a href="{{ path("archetype_ability_remove", {'id': ability.id, 'archetype': archetype.name}) }}">Remove</a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <a href="{{ path("archetype_ability_add", {'archetype': archetype.name}) }}">Add new ability</a>
+
+    <h2>Camping Skills</h2>
+
+    <table>
+        <thead>
+        <tr>
+            {% for campingSkill in archetype.campingSkills  %}
+                <th>{{ campingSkill.name }}</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+                <td>Target : {{ campingSkill.target }}</td>
+                <td>Time cost : {{ campingSkill.timeCost }}</td>
+                <td>Description :{{ campingSkill.description }}</td>
+                <td><a href="{{ path("archetype_campingskill_update", {'id': campingSkill.id, 'archetype': archetype.name}) }}">Modify</a></td>
+                <td><a href="{{ path("archetype_campingskill_remove", {'id': campingSkill.id, 'archetype': archetype.name}) }}">Remove</a></td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <a href="{{ path("archetype_campingskill_add", {'archetype': archetype.name}) }}">Add new camping skill</a>
+
+    <h2>Stats</h2>
+
+    <table>
+    {% for attribute in archetype.attributes  %}
+        <thead>
+        <tr>
+                <th>Stats level{{ attribute.level }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+            <td>Health : {{ attribute.health }}</td>
+            <td>Dodge : {{ attribute.dodge }}</td>
+            <td>Speed : {{ attribute.speed }}</td>
+            <td>Critical : {{ attribute.critical }}</td>
+            <td>Min Damage : {{ attribute.damages[0] }}</td>
+            <td>Max Damage : {{ attribute.damages[1] }}</td>
+        </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+
+{% endblock %}
