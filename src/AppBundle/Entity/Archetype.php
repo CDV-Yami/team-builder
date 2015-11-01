@@ -353,5 +353,4 @@ class Archetype
         $this->trap = $trap;
     }
 
-
 }
