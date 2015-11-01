@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Archetypes {% endblock %}
+
+{% block body %}
+    <h1>Archetypes</h1>
+
+    <ul>
+        {% for archetype in archetypes %}
+            <li>
+                <a href ="{{ path('archetype_show', {'archetype': archetype.name}) }}">{{archetype.name}}</a>
+                <a href="{{path('archetype_update', {'archetype': archetype.name})}}">Modify</a>
+                <a href="{{path('archetype_remove', {'archetype': archetype.name})}}">Remove</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{path('archetype_add')}}">Add new Archetype</a>
+{% endblock %}
