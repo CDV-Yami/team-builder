@@ -8,49 +8,49 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Yami\TeamBuilder\AppBundle\Entity\Ability;
 use Yami\TeamBuilder\AppBundle\Entity\Archetype;
+use Yami\TeamBuilder\AppBundle\Entity\Attributes;
 use Yami\TeamBuilder\AppBundle\Entity\CampingSkill;
-use Yami\TeamBuilder\AppBundle\Form\Type\AbilityType;
+use Yami\TeamBuilder\AppBundle\Form\Type\AttributesType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Yami\TeamBuilder\AppBundle\Form\Type\ArchetypeType;
 use Yami\TeamBuilder\AppBundle\Form\Type\CampingSkillType;
 
-class AbilityController extends Controller
+class AttributesController extends Controller
 {
-
     /**
-     * @Route("/archetypes/{archetype}/abilities/create", name="archetype_ability_create")
+     * @Route("/archetypes/{archetype}/attributes/create", name="archetype_attributes_create")
      * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
      */
     public function createAction(Archetype $archetype, Request $request)
     {
-        $ability = new Ability();
-        $ability->setArchetype($archetype);
+        $attributes = new Attributes();
+        $attributes->setArchetype($archetype);
 
-        $form = $this->createForm(new AbilityType(), $ability);
+        $form = $this->createForm(new AttributesType(), $attributes);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
-            $manager->persist($ability);
+            $manager->persist($attributes);
             $manager->flush();
 
             return $this->redirectToRoute('archetype_show', ['archetype' => $archetype->getName()]);
         }
 
-        return $this->render('AppBundle:archetype:addAbility.html.twig', ['form' => $form->createView()]);
+        return $this->render('AppBundle:archetype:addAttributes.html.twig', ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("/archetypes/{archetype}/abilities/update/{ability}", name="archetype_ability_update")
+     * @Route("/archetypes/{archetype}/attributes/update/{attributes}", name="archetype_attributes_update")
      * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
-     * @ParamConverter("ability", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Ability", options={"repository_method"="find"})
+     * @ParamConverter("attributes", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\attributes", options={"repository_method"="find"})
      */
-    public function updateAction(Archetype $archetype, Ability $ability, Request $request)
+    public function updateAction(Archetype $archetype, Attributes $attributes, Request $request)
     {
-        $form = $this->createForm(new AbilityType(), $ability);
+        $form = $this->createForm(new AttributesType(), $attributes);
 
         $form->handleRequest($request);
 
@@ -61,23 +61,22 @@ class AbilityController extends Controller
             return $this->redirectToRoute('archetype_show', ['archetype' => $archetype->getName()]);
         }
 
-        return $this->render('AppBundle:archetype:addAbility.html.twig', ['form' => $form->createView()]);
+        return $this->render('AppBundle:archetype:addAttributes.html.twig', ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("/archetypes/{archetype}/abilities/delete/{ability}", name="archetype_ability_delete")
-     * @Method({"GET", "POST"})
+     * @Route("/archetypes/{archetype}/attributes/delete/{attributes}", name="archetype_attributes_delete")
+     * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
-     * @ParamConverter("ability", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Ability", options={"repository_method"="find"})
+     * @ParamConverter("attributes", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\attributes", options={"repository_method"="find"})
      */
-    public function deleteAction(Archetype $archetype, Ability $ability)
+    public function deleteAction(Archetype $archetype, Attributes $attributes)
     {
         $manager = $this->getDoctrine()->getManager();
-        $manager->remove($ability);
+        $manager->remove($attributes);
         $manager->flush();
 
         return $this->redirectToRoute('archetype_show', ['archetype' => $archetype->getName()]);
 
     }
-
 }

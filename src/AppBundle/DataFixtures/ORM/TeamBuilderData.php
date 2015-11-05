@@ -65,27 +65,18 @@ class TeamBuilderData implements FixtureInterface
         $unshakeable->setTimeCost(4);
         $manager->persist($unshakeable);
 
-        $lvl1Crusader = new Entity\Attributes(
-            $crusader,
-            1,
-            33,
-            5,
-            1,
-            5,
-            [6,12]
-        );
+
+        $lvl1Crusader = new Entity\Attributes();
+        $lvl1Crusader->setArchetype($crusader);
+        $lvl1Crusader->setLevel(1);
+        $lvl1Crusader->setHealth(33);
+        $lvl1Crusader->setDodge(5);
+        $lvl1Crusader->setSpeed(1);
+        $lvl1Crusader->setCritical(3);
+        $lvl1Crusader->setMinDamages(6);
+        $lvl1Crusader->setMaxDamages(12);
         $manager->persist($lvl1Crusader);
 
-        $lvl1Hellion = new Entity\Attributes(
-            $hellion,
-            1,
-            26,
-            10,
-            4,
-            2,
-            [6,12]
-        );
-        $manager->persist($lvl1Hellion);
 
         $manager->flush();
     }

@@ -18,8 +18,8 @@ class CampingSkillController extends Controller
 {
 
     /**
-     * @Route("/archetypes/{archetype}/campingskills", name="archetype_campingskill_create")
-     * @Method({"POST"})
+     * @Route("/archetypes/{archetype}/campingskills/create", name="archetype_campingskill_create")
+     * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
      */
     public function createAction(Archetype $archetype, Request $request)
@@ -43,8 +43,8 @@ class CampingSkillController extends Controller
     }
 
     /**
-     * @Route("/archetypes/{archetype}/campingskills/{campingSkill}", name="archetype_campingskill_update")
-     * @Method({"PUT"})
+     * @Route("/archetypes/{archetype}/campingskills/update/{campingSkill}", name="archetype_campingskill_update")
+     * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
      * @ParamConverter("campingSkill", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\CampingSkill", options={"repository_method"="find"})
      */
@@ -65,8 +65,8 @@ class CampingSkillController extends Controller
     }
 
     /**
-     * @Route("/archetypes/{archetype}/campingskills/{campingSkill}", name="archetype_campingskill_delete")
-     * @Method({"DELETE"})
+     * @Route("/archetypes/{archetype}/campingskills/delete/{campingSkill}", name="archetype_campingskill_delete")
+     * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
      * @ParamConverter("campingSkill", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\CampingSkill", options={"repository_method"="find"})
      */

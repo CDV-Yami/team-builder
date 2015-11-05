@@ -3,6 +3,7 @@
 namespace Yami\TeamBuilder\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Attributes
@@ -24,6 +25,8 @@ class Attributes
      * @var Archetype
      *
      * @ORM\ManyToOne(targetEntity="Yami\TeamBuilder\AppBundle\Entity\Archetype", inversedBy="attributes")
+     * @Assert\NotNull()
+     * @Assert\Type("Yami\TeamBuilder\AppBundle\Entity\Archetype")
      */
     private $archetype;
 
@@ -31,6 +34,14 @@ class Attributes
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 6,
+     *      minMessage = "The level should be at least 1",
+     *      maxMessage = "The level can't be greater than 5"
+     * )
      */
     private $level;
 
@@ -38,6 +49,14 @@ class Attributes
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 100,
+     *      minMessage = "The health value should be at least 10",
+     *      maxMessage = "The health value can't be greater than 100"
+     * )
      */
     private $health;
 
@@ -45,6 +64,14 @@ class Attributes
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 80,
+     *      minMessage = "The dodge should be at least 1",
+     *      maxMessage = "The dodge can't be greater than 80"
+     * )
      */
     private $dodge;
 
@@ -52,6 +79,14 @@ class Attributes
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 20,
+     *      minMessage = "The speed should be at least 1",
+     *      maxMessage = "The speed can't be greater than 80"
+     * )
      */
     private $speed;
 
@@ -59,26 +94,46 @@ class Attributes
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 15,
+     *      minMessage = "The critical should be at least 1",
+     *      maxMessage = "The critical can't be greater than 15"
+     * )
      */
     private $critical;
 
     /**
-     * @var array
+     * @var int
      *
-     * @ORM\Column(type="simple_array", nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 40,
+     *      minMessage = "The min damage should be at least 1",
+     *      maxMessage = "The min damage can't be greater than 15"
+     * )
      */
-    private $damages;
+    private $minDamages;
 
-    public function __construct(Archetype $archetype, $level, $health, $dodge, $speed, $critical, array $damages)
-    {
-        $this->archetype = $archetype;
-        $this->level = $level;
-        $this->health = $health;
-        $this->dodge = $dodge;
-        $this->speed = $speed;
-        $this->critical = $critical;
-        $this->damages = $damages;
-    }
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 15,
+     *      minMessage = "The max damage should be at least 1",
+     *      maxMessage = "The max damage can't be greater than 15"
+     * )
+     */
+    private $maxDamages;
 
     /**
      * @return int|null
@@ -137,11 +192,92 @@ class Attributes
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function getDamages()
+    public function getMaxDamages()
     {
-        return $this->damages;
+        return $this->maxDamages;
     }
+
+    /**
+     * @return int
+     */
+    public function getMinDamages()
+    {
+        return $this->minDamages;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param Archetype $archetype
+     */
+    public function setArchetype($archetype)
+    {
+        $this->archetype = $archetype;
+    }
+
+    /**
+     * @param int $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @param int $health
+     */
+    public function setHealth($health)
+    {
+        $this->health = $health;
+    }
+
+    /**
+     * @param int $dodge
+     */
+    public function setDodge($dodge)
+    {
+        $this->dodge = $dodge;
+    }
+
+    /**
+     * @param int $speed
+     */
+    public function setSpeed($speed)
+    {
+        $this->speed = $speed;
+    }
+
+    /**
+     * @param float $critical
+     */
+    public function setCritical($critical)
+    {
+        $this->critical = $critical;
+    }
+
+    /**
+     * @param int $maxDamage
+     */
+    public function setMaxDamages($maxDamages)
+    {
+        $this->maxDamages = $maxDamages;
+    }
+
+    /**
+     * @param int $minDamage
+     */
+    public function setMinDamages($minDamages)
+    {
+        $this->minDamages = $minDamages;
+    }
+
 
 }

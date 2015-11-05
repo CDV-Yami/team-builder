@@ -29,16 +29,7 @@ class ArchetypeController extends Controller
             ->findAll()
         ;
 
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getName();
-        });
-
-        $serializer = new Serializer(array($normalizer), array($encoder));
-
-        return new Response($archetypes, Response::HTTP_OK);
+        return $this->render('AppBundle:archetype:index.html.twig', ['archetypes' => $archetypes]);
     }
 
     /**
@@ -52,8 +43,8 @@ class ArchetypeController extends Controller
     }
 
     /**
-     * @Route("/archetypes", name="archetype_create")
-     * @Method({"POST"})
+     * @Route("/archetypes/create", name="archetype_create")
+     * @Method({"GET","POST"})
      */
     public function createAction(Request $request)
     {
@@ -76,7 +67,7 @@ class ArchetypeController extends Controller
 
     /**
      * @Route("/archetypes/{archetype}/update", name="archetype_update")
-     * @Method({"PUT"})
+     * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
      */
     public function updateAction(Archetype $archetype, Request $request)
@@ -96,8 +87,8 @@ class ArchetypeController extends Controller
     }
 
     /**
-     * @Route("/archetypes/{archetype}", name="archetype_delete")
-     * @Method({"DELETE"})
+     * @Route("/archetypes/{archetype}/delete", name="archetype_delete")
+     * @Method({"GET","POST"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
      */
     public function deleteAction(Archetype $archetype, Request $request)
