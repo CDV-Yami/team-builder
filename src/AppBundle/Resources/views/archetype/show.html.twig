@@ -95,4 +95,50 @@
     </table>
     <a href="{{ path("archetype_attributes_create", {'archetype':archetype.name}) }}">Add new Attributes</a>
 
+    <h2>Weapons</h2>
+
+    <table>
+        {% for weapon in archetype.weapons  %}
+            <thead>
+            <tr>
+                <th>Weapon Level {{ weapon.level }}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+                <td>Name : {{ weapon.name }}</td>
+                <td>Description : {{ weapon.description }}</td>
+                <td><a href="{{ path("archetype_weapon_update", {'weapon': weapon.id, 'archetype': archetype.name}) }}">Modify</a></td>
+                <td><a href="{{ path("archetype_weapon_delete", {'weapon': weapon.id, 'archetype': archetype.name}) }}">Remove</a></td>
+            </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+    <a href="{{ path("archetype_weapon_create", {'archetype':archetype.name}) }}">Add new Weapon</a>
+
+    <h2>Armor</h2>
+
+    <table>
+        {% for armor in archetype.armor  %}
+            <thead>
+            <tr>
+                <th>Armor Level {{ armor.level }}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+                <td>Name : {{ armor.name }}</td>
+                <td>Description : {{ armor.description }}</td>
+                <td><a href="{{ path("archetype_armor_update", {'armor': armor.id, 'archetype': archetype.name}) }}">Modify</a></td>
+                <td><a href="{{ path("archetype_armor_delete", {'armor': armor.id, 'archetype': archetype.name}) }}">Remove</a></td>
+            </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+    <a href="{{ path("archetype_armor_create", {'archetype':archetype.name}) }}">Add new Armor</a>
+
 {% endblock %}

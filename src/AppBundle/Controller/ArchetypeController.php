@@ -33,7 +33,7 @@ class ArchetypeController extends Controller
     }
 
     /**
-     * @Route("/archetypes/{archetype}", name="archetype_show")
+     * @Route("/archetypes/{archetype}/show", name="archetype_show")
      * @Method({"GET"})
      * @ParamConverter("archetype", converter="doctrine.orm", class="Yami\TeamBuilder\AppBundle\Entity\Archetype", options={"repository_method"="findOneByName"})
      */

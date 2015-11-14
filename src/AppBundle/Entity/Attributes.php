@@ -40,7 +40,7 @@ class Attributes
      *      min = 1,
      *      max = 6,
      *      minMessage = "The level should be at least 1",
-     *      maxMessage = "The level can't be greater than 5"
+     *      maxMessage = "The level can't be greater than 6"
      * )
      */
     private $level;

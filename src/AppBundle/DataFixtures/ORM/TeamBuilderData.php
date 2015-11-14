@@ -77,6 +77,19 @@ class TeamBuilderData implements FixtureInterface
         $lvl1Crusader->setMaxDamages(12);
         $manager->persist($lvl1Crusader);
 
+        $lvl1CrusaderWeapon = new Entity\Weapon();
+        $lvl1CrusaderWeapon->setName('Battered Longsword');
+        $lvl1CrusaderWeapon->setArchetype($crusader);
+        $lvl1CrusaderWeapon->setLevel(1);
+        $lvl1CrusaderWeapon->setDescription('DMG base: 6-12, CRT base: 5%, SPD base: 0');
+        $manager->persist($lvl1CrusaderWeapon);
+
+        $lvl1CrusaderArmor = new Entity\Armor();
+        $lvl1CrusaderArmor->setName('Rusty Hauberk');
+        $lvl1CrusaderArmor->setArchetype($crusader);
+        $lvl1CrusaderArmor->setLevel(1);
+        $lvl1CrusaderArmor->setDescription('DODGE base: 5, HP base: 33');
+        $manager->persist($lvl1CrusaderArmor);
 
         $manager->flush();
     }

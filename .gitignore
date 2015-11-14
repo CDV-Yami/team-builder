@@ -10,4 +10,7 @@
 /vendor/
 /web/bundles/
 
+
 ./idea
+.idea/
+.gitignore

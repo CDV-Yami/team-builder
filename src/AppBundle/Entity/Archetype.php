@@ -58,6 +58,20 @@ class Archetype
     private $attributes;
 
     /**
+     * @var Weapon[]
+     *
+     * @ORM\OneToMany(targetEntity="Yami\TeamBuilder\AppBundle\Entity\Weapon", mappedBy="archetype")
+     */
+    private $weapons;
+
+    /**
+     * @var Armor[]
+     *
+     * @ORM\OneToMany(targetEntity="Yami\TeamBuilder\AppBundle\Entity\Armor", mappedBy="archetype")
+     */
+    private $armor;
+
+    /**
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=false)
@@ -271,6 +285,22 @@ class Archetype
     public function getTrap()
     {
         return $this->trap;
+    }
+
+    /**
+     * @return Weapon[]
+     */
+    public function getWeapons()
+    {
+        return $this->weapons;
+    }
+
+    /**
+     * @return Armor[]
+     */
+    public function getArmor()
+    {
+        return $this->armor;
     }
 
     /**
