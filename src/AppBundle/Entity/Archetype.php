@@ -69,7 +69,7 @@ class Archetype
      *
      * @ORM\OneToMany(targetEntity="Yami\TeamBuilder\AppBundle\Entity\Armor", mappedBy="archetype")
      */
-    private $armor;
+    private $armors;
 
     /**
      * @var int
@@ -298,9 +298,9 @@ class Archetype
     /**
      * @return Armor[]
      */
-    public function getArmor()
+    public function getArmors()
     {
-        return $this->armor;
+        return $this->armors;
     }
 
     /**

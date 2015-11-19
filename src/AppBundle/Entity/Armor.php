@@ -36,7 +36,7 @@ class Armor
     /**
      * @var Archetype
      *
-     * @ORM\ManyToOne(targetEntity="Yami\TeamBuilder\AppBundle\Entity\Archetype", inversedBy="armor")
+     * @ORM\ManyToOne(targetEntity="Yami\TeamBuilder\AppBundle\Entity\Archetype", inversedBy="armors")
      * @Assert\NotNull()
      * @Assert\Type("Yami\TeamBuilder\AppBundle\Entity\Archetype")
      */
@@ -56,6 +56,36 @@ class Armor
      * )
      */
     private $level;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 100,
+     *      minMessage = "The health value should be at least 10",
+     *      maxMessage = "The health value can't be greater than 100"
+     * )
+     */
+    private $health;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 80,
+     *      minMessage = "The dodge should be at least 1",
+     *      maxMessage = "The dodge can't be greater than 80"
+     * )
+     */
+    private $dodge;
 
     /**
      * @var string
@@ -127,6 +157,38 @@ class Armor
     public function setLevel($level)
     {
         $this->level = $level;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHealth()
+    {
+        return $this->health;
+    }
+
+    /**
+     * @param int $health
+     */
+    public function setHealth($health)
+    {
+        $this->health = $health;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDodge()
+    {
+        return $this->dodge;
+    }
+
+    /**
+     * @param int $dodge
+     */
+    public function setDodge($dodge)
+    {
+        $this->dodge = $dodge;
     }
 
     /**
